@@ -1,8 +1,8 @@
 from random import randint
 class Mob:
-    def __init__(self, hit_point, strength, level, name, agility) -> None:
-        self.hit_point = hit_point
-        self.max_hit_point = hit_point
+    def __init__(self, max_hit_point, strength, level, name, agility) -> None:
+        self.max_hit_point = max_hit_point
+        self.hit_point = max_hit_point
         self.strength = strength
         self.level = level
         self.name = name
@@ -41,10 +41,14 @@ class Mob:
         if self.is_lvl_up == True:
             self.level += 1
             self.is_lvl_up = False
+            self.max_hit_point += randint(8,13) 
+            self.hit_point = self.max_hit_point
+            self.strength += randint(1,4)
+            self.agility += randint(1,3)
 
     def heal(self):
         if self.heal_potion_amount > 0:
-            heal_amount = self.max_hit_point / 5 
+            heal_amount = round(self.max_hit_point / 5) 
             self.hit_point += heal_amount
             if self.hit_point > self.max_hit_point:
                 self.hit_point = self.max_hit_point
