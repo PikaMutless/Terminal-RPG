@@ -48,12 +48,16 @@ class Mob:
 
     def heal(self):
         if self.heal_potion_amount > 0:
-            heal_amount = round(self.max_hit_point / 5) 
+            heal_amount = round(self.max_hit_point / 2) 
+            if self.hit_point + heal_amount > self.max_hit_point:
+                heal_amount = self.max_hit_point - self.hit_point
             self.hit_point += heal_amount
-            if self.hit_point > self.max_hit_point:
-                self.hit_point = self.max_hit_point
-        self.heal_potion_amount -= 1
-        print(f"{self.name} healed {heal_amount} hit points")
 
+            print(f"{self.name} healed {heal_amount} hit points")    
+            self.heal_potion_amount -= 1
+        else:
+            print(f"{self.name} don't have heal potion!")  
+        
+#Add races that are getting some stats more and getting some stats less. 
 
 
