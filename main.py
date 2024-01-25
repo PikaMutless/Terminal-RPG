@@ -21,7 +21,6 @@ class Game:
             print("\033[91m",self.enemy.name, ":", self.enemy.hit_point, "HP")
             print("\033[97m You :", self.player.hit_point, "HP")
             players_choise = int(input(f" Attack(1) | Heal(2) | Flee (3) | Check(4)\n=>"))
-
             if players_choise == 1:
                 self.player.attack(self.enemy)
             elif players_choise == 2:
@@ -42,6 +41,7 @@ class Game:
     def create_enemy(self):
         player_lvl = self.player.level   
         enemy = Mob(randint(player_lvl*8, player_lvl*13), randint(player_lvl*1, player_lvl*4), player_lvl,  choice(name_list), randint(player_lvl*1, player_lvl*4))
+
         return enemy
     
 if __name__ == "__main__":
