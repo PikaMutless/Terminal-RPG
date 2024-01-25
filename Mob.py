@@ -28,14 +28,16 @@ class Mob:
         if self.is_hit(): 
             target.hit_point -= damage_power
             if target.hit_point <= 0:
-                
                 self.is_lvl_up = True
                 print(f"{self.name} killed {target.name}!")
+                self.lvl_up_controller()
+
+
             else:
-                print(f"{self.name} dealt {damage_power} damage to {target.name}!")
+                print(f"{self.name} dealt {damage_power} damage to {target.name}!\n")
                 
         else:
-            print(f"{self.name} missed!")
+            print(f"{self.name} missed!\n")
 
     def lvl_up_controller(self):
         if self.is_lvl_up == True:
