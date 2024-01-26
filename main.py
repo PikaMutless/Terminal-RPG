@@ -1,7 +1,6 @@
 from random import randint, choice
 from Mob import Mob
-from ai import fighting_ai
-
+import ai 
 name_list = ["Frank", "Mahmut", "Barış", "Umut",
              "Yüksel", "Gülçin", "Alper", "Ece",
              "Ömer", "Sans", "Flowey", "Asgore",
@@ -22,24 +21,41 @@ class Game:
             print("\033[91m",self.enemy.name, ":", self.enemy.hit_point, "HP")
             print("\033[97m You :", self.player.hit_point, "HP")
             players_choise = int(input(f" Attack(1) | Heal(2) | Flee (3) | Check(4)\n=>"))
+            
             if players_choise == 1:
                 self.player.attack(self.enemy)
+                is_enemy_turn = True       
+            
             elif players_choise == 2:
                 self.player.heal()
+                is_enemy_turn = True         
+            
             elif players_choise == 3:
                 print("You ran away!")
                 self.enemy =  self.create_enemy()
+                is_enemy_turn = False           
+            
             elif players_choise == 4:
                 check_character = int(input("You(1) | Enemy(2)\n=>"))
+                is_enemy_turn = True               
+            
                 if check_character == 1:
-                    print("Name :", self.player.name, "\nLevel :", self.player.level, "\nHit Point :", self.player.hit_point ,"/",self.player.max_hit_point, "\nStrength :", self.player.strength, "\nAgility :",self.player.agility)
+                    print("Name :", self.player.name, "\nLevel :", self.player.level, "\nHit Point :", self.player.hit_point ,"/",self.player.max_hit_point, "\nStrength :", self.player.strength, "\nAgility :",self.player.agility)        
+            
                 elif check_character == 2:
-                    print("Name :",self.enemy.name, "\nLevel :", self.enemy.level, "\nHit Point :", self.enemy.hit_point ,"/",self.enemy.max_hit_point, "\nStrength :", self.enemy.strength, "\nAgility :",self.enemy.agility)
-            elif players_choise == 5:
-                fighting_ai(self.enemy, self.player)
+                    print("Name :",self.enemy.name, "\nLevel :", self.enemy.level, "\nHit Point :", self.enemy.hit_point ,"/",self.enemy.max_hit_point, "\nStrength :", self.enemy.strength, "\nAgility :",self.enemy.agility)          
             
             if self.enemy.hit_point <= 0:
                 self.enemy = self.create_enemy()
+
+            if is_enemy_turn == True:
+                ai.enemy_turn(game,self.enemy, self.player)
+
+            if self.player.hit_point <= 0:
+                print(f"""YOU DIED!\n
+                      You can't give up just yet...\n
+                      {self.player.name}! Stay determined.""")
+            
         print("You did it. You finally got to the lvl 10. Now you can get back to the normal world!")
                 
     def create_enemy(self):

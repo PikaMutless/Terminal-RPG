@@ -1,3 +1,11 @@
 from Mob import Mob
-def fighting_ai(enemy, player):
-    enemy.attack(player)
+from random import randint
+def enemy_turn(self, enemy, player):
+    flee_chance = randint(1,51)
+    if enemy.hit_point < enemy.max_hit_point / 2:
+        enemy.heal()
+    elif flee_chance == 1:
+        print(enemy.name,"ran away")
+        self.enemy =  self.create_enemy()
+    else:
+        enemy.attack(player)

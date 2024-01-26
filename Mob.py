@@ -48,8 +48,11 @@ class Mob:
             if self.hit_point + heal_amount > self.max_hit_point:
                 heal_amount = self.max_hit_point - self.hit_point
             self.hit_point += heal_amount
-            print(f"{self.name} healed {heal_amount} hit points")    
-            self.heal_potion_amount -= 1
+            if heal_amount <= 0:
+                print("Your HP is full. You can't heal yourself now.")
+            else:
+                print(f"{self.name} healed {heal_amount} hit points")    
+                self.heal_potion_amount -= 1
         else:
             print(f"{self.name} don't have heal potion!")  
         
