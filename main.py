@@ -1,5 +1,6 @@
 from random import randint, choice
 from Mob import Mob
+from ai import fighting_ai
 
 name_list = ["Frank", "Mahmut", "Barış", "Umut",
              "Yüksel", "Gülçin", "Alper", "Ece",
@@ -34,6 +35,9 @@ class Game:
                     print("Name :", self.player.name, "\nLevel :", self.player.level, "\nHit Point :", self.player.hit_point ,"/",self.player.max_hit_point, "\nStrength :", self.player.strength, "\nAgility :",self.player.agility)
                 elif check_character == 2:
                     print("Name :",self.enemy.name, "\nLevel :", self.enemy.level, "\nHit Point :", self.enemy.hit_point ,"/",self.enemy.max_hit_point, "\nStrength :", self.enemy.strength, "\nAgility :",self.enemy.agility)
+            elif players_choise == 5:
+                fighting_ai(self.enemy, self.player)
+            
             if self.enemy.hit_point <= 0:
                 self.enemy = self.create_enemy()
         print("You did it. You finally got to the lvl 10. Now you can get back to the normal world!")
