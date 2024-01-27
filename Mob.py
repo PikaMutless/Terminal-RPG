@@ -9,8 +9,6 @@ class Mob:
         self.agility = agility
         self.is_lvl_up = False
         self.heal_potion_amount = 3
-        print("A new mob created")
-
     
     def is_hit(self):
         if self.target.agility == self.agility and randint(1,6) == 1:
@@ -50,6 +48,7 @@ class Mob:
             self.hit_point += heal_amount
             if heal_amount <= 0:
                 print("Your HP is full. You can't heal yourself now.")
+                is_enemy_turn = False
             else:
                 print(f"{self.name} healed {heal_amount} hit points")    
                 self.heal_potion_amount -= 1
