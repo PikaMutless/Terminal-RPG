@@ -1,6 +1,7 @@
 from random import randint, choice
 from Mob import Mob
 import ai 
+import utils
 name_list = ["Frank", "Mahmut", "Barış", "Umut",
              "Yüksel", "Gülçin", "Alper", "Ece",
              "Ömer", "Sans", "Flowey", "Asgore",
@@ -10,7 +11,7 @@ name_list = ["Frank", "Mahmut", "Barış", "Umut",
              "İmer EGE"]
 class Game:
     def __init__(self) -> None:
-        player_name = input("What is your name? \n=>")
+        player_name ="test player" #input("What is your name? \n=>")
         self.player =  Mob(randint(8,13), randint(1,4), 1,  "", randint(1,4))
         self.player.name = player_name
         self.enemy = self.create_enemy()
@@ -20,7 +21,7 @@ class Game:
             print("\033[92m#"*20,"\n")
             print("\033[91m",self.enemy.name, ":", self.enemy.hit_point, "HP", sep="")
             print("\033[97mYou :", self.player.hit_point, "HP")
-            players_choise = int(input(f"Attack(1) | Heal(2) | Flee (3) | Check(4)\n=>"))
+            players_choise = input(f"Attack(1) | Heal(2) | Flee (3) | Check(4)\n=>")
             
             if players_choise == "1":
                 self.player.attack(self.enemy)
@@ -28,7 +29,7 @@ class Game:
             
             elif players_choise == "2":
                 before_healing =self.player.hit_point
-                self.player.heal()
+                self.player.consume_potion()
                 after_healing = self.player.hit_point
                 if before_healing == after_healing:
                     is_enemy_turn = False
@@ -76,4 +77,6 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.loop()
+
+
 

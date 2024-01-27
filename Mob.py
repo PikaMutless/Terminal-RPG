@@ -35,18 +35,21 @@ class Mob:
             print(f"{self.name} missed!\n")
 
     def lvl_changer(self):
+            """ Changes stats by level"""
             self.max_hit_point *= self.level 
             self.hit_point = self.max_hit_point
             self.strength *= self.level 
             self.agility *= self.level  
 
-    def heal(self):
+    def consume_potion(self):
+        """ If heal_potion_amount is above 0, consume single potion to gain health."""
         if self.heal_potion_amount > 0:
             heal_amount = round(self.max_hit_point / 2) 
             if self.hit_point + heal_amount > self.max_hit_point:
                 heal_amount = self.max_hit_point - self.hit_point
             self.hit_point += heal_amount
             if heal_amount <= 0:
+                self.heal_potion_amount -= 1
                 print("Your HP is full. You can't heal yourself now.")
                 is_enemy_turn = False
             else:
@@ -54,6 +57,10 @@ class Mob:
                 self.heal_potion_amount -= 1
         else:
             print(f"{self.name} don't have heal potion!")  
+
+#############################################################################
+
+
         
 #Add races that are getting some stats more and getting some stats less. 
 
